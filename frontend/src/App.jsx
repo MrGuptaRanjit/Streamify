@@ -18,6 +18,7 @@ const App = () => {
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnboarded;
 
+  
   if (isLoading) {
     return <PageLoader />;
   }
@@ -60,7 +61,10 @@ const App = () => {
         <Route
           path="/onboarding"
           element={
-            isAuthenticated ? <OnboardingPage /> : <Navigate to="/login" />
+            isAuthenticated ? (
+              !isOnboarded ? ( <OnboardingPage />) : (<Navigate to="/" />)
+            ) : (
+            <Navigate to="/login" /> )
           }
         />
       </Routes>
