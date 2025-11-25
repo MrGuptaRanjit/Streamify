@@ -30,6 +30,7 @@ const OnboardingPage = () => {
     }
   });
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 

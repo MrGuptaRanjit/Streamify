@@ -169,7 +169,7 @@ const SignUpPage = () => {
             {/* ILLUSTRATION */}
             <div className=" relative aspect-square max-w-sm mx-auto">
               <img
-                src="/i.png"
+                src="/signupImage.png"
                 alt="Language Connection Illustration"
                 className="w-full h-full"
               />
