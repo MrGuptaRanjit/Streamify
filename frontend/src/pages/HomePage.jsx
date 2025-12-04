@@ -7,7 +7,12 @@ import {
   sendFriendRequest,
 } from "../lib/api";
 import { Link } from "react-router";
-import { CheckCircleIcon, MapPinIcon, UserIcon, UserPlusIcon } from "lucide-react";
+import {
+  CheckCircleIcon,
+  MapPinIcon,
+  UserIcon,
+  UserPlusIcon,
+} from "lucide-react";
 import FriendCard, { getLanguageFlag } from "../components/FriendCard";
 import NoFriendFound from "../components/NoFriendFound";
 import { capitialize } from "../lib/utils";
@@ -38,18 +43,17 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-  const outgoingIds = new Set();
-  if (outgoingFriendReqs?.length > 0) {
-    outgoingFriendReqs.forEach((req) => {
-      outgoingIds.add(req.recipient._id);
-    });
-  }
-  setOutgoingRequestsIds(outgoingIds);
-}, [outgoingFriendReqs]);
-
+    const outgoingIds = new Set();
+    if (outgoingFriendReqs?.length > 0) {
+      outgoingFriendReqs.forEach((req) => {
+        outgoingIds.add(req.recipient._id);
+      });
+    }
+    setOutgoingRequestsIds(outgoingIds);
+  }, [outgoingFriendReqs]);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-base-200 p-4 sm:p-6 lg:p-8">
       <div className="container mx-auto space-y-10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -132,12 +136,12 @@ const HomePage = () => {
                       </div>
 
                       {/* LANGUAGES WITH FLAGES */}
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="badge badge-secondary">
+                      <div className="flex gap-2 mb-3 whitespace-nowrap">
+                        <span className="badge badge-secondary text-xs px-2 py-1">
                           {getLanguageFlag(user.nativeLanguage)}
                           Native: {capitialize(user.nativeLanguage)}
                         </span>
-                        <span className="badge badge-outline">
+                        <span className="badge badge-outline text-xs px-2 py-1">
                           {getLanguageFlag(user.learningLanguage)}
                           Learning: {capitialize(user.learningLanguage)}
                         </span>
@@ -156,10 +160,10 @@ const HomePage = () => {
                         onClick={() => sendRequestMutation(user._id)}
                         disabled={hasRequestBeenSent || isPending}
                       >
-                        {hasRequestBeenSent ? ( 
+                        {hasRequestBeenSent ? (
                           <>
-                          <CheckCircleIcon className="size-4 mr-2" />
-                          Request Sent
+                            <CheckCircleIcon className="size-4 mr-2" />
+                            Request Sent
                           </>
                         ) : (
                           <>
@@ -181,4 +185,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

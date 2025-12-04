@@ -93,19 +93,22 @@ const CallPage = () => {
 };
 
 const CallContent = () => {
-  const {useCallCallingState} = useCallStateHooks()
+  const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
 
   const navigate = useNavigate();
 
-  if(callingState === callingState.LEFT) return navigate("/")
+  if (callingState === CallingState.LEFT) {
+    navigate("/");
+    return null;
+  }
 
   return (
     <StreamTheme>
       <SpeakerLayout />
       <CallControls />
     </StreamTheme>
-  )
-}
+  );
+};
 
 export default CallPage;
