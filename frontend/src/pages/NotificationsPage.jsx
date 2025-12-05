@@ -76,6 +76,7 @@ const NotificationsPage = () => {
                                 {request.sender.fullName}
                               </h3>
                               <div className="flex flex-wrap gap-1.5 mt-1">
+                                
                                 <span className="badge badge-secondary badge-sm">
                                   Native: {request.sender.nativeLanguage}
                                 </span>
