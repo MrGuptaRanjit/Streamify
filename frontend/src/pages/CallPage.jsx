@@ -72,22 +72,21 @@ const CallPage = () => {
   }, [tokenData, authUser, callId]);
 
   if (isLoading || isConnecting) return <PageLoader />;
-return (
-  <div className="h-screen w-screen overflow-hidden flex flex-col bg-black">
-    {client && call ? (
-      <StreamVideo client={client}>
-        <StreamCall call={call}>
-          <CallContent />
-        </StreamCall>
-      </StreamVideo>
-    ) : (
-      <div className="flex items-center justify-center h-full text-white">
-        <p>Could not join the call. Please refresh.</p>
-      </div>
-    )}
-  </div>
-);
-
+  return (
+    <div className="h-screen w-screen overflow-hidden flex flex-col bg-black">
+      {client && call ? (
+        <StreamVideo client={client}>
+          <StreamCall call={call}>
+            <CallContent />
+          </StreamCall>
+        </StreamVideo>
+      ) : (
+        <div className="flex items-center justify-center h-full text-white">
+          <p>Could not join the call. Please refresh.</p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 const CallContent = () => {
@@ -102,10 +101,8 @@ const CallContent = () => {
 
   return (
     <StreamTheme>
-
       {/* Responsive wrapper */}
       <div className="flex flex-col h-screen w-screen overflow-hidden">
-
         {/* Video Section */}
         <div className="flex-1 min-h-0">
           <SpeakerLayout
@@ -118,15 +115,11 @@ const CallContent = () => {
 
         {/* Controls */}
         <div className="p-2 bg-black/40">
-          <CallControls 
-            layout="mobile"
-            variant="minimal"
-          />
+          <CallControls layout="mobile" variant="minimal" />
         </div>
       </div>
     </StreamTheme>
   );
 };
-
 
 export default CallPage;

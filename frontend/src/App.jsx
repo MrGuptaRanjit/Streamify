@@ -12,17 +12,17 @@ import useAuthUser from "./hooks/useAuthUser.js";
 import Layout from "./components/Layout.jsx";
 import { useThemeStore } from "./store/useThemeStore.js";
 import FriendsPage from "./pages/FriendPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 
 const App = () => {
   // tanstack query
   const { isLoading, authUser } = useAuthUser();
 
-  const {theme} = useThemeStore();
+  const { theme } = useThemeStore();
 
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnboarded;
 
-  
   if (isLoading) {
     return <PageLoader />;
   }
@@ -30,11 +30,12 @@ const App = () => {
   return (
     <div className=" h-screen" data-theme={theme}>
       <Routes>
+        <Route path="/about" element={<AboutPage />} />
         <Route
           path="/"
           element={
             isAuthenticated && isOnboarded ? (
-              <Layout showSidebar={true} >
+              <Layout showSidebar={true}>
                 <HomePage />
               </Layout>
             ) : (
@@ -44,11 +45,23 @@ const App = () => {
         />
         <Route
           path="/login"
-          element={!isAuthenticated ? <LoginPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />}
+          element={
+            !isAuthenticated ? (
+              <LoginPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/signup"
-          element={!isAuthenticated ? <SignUpPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />}
+          element={
+            !isAuthenticated ? (
+              <SignUpPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/notifications"
@@ -59,20 +72,21 @@ const App = () => {
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
-            )}
+            )
+          }
         />
         <Route
-  path="/friends"
-  element={
-    isAuthenticated && isOnboarded ? (
-      <Layout showSidebar={true}>
-        <FriendsPage />
-      </Layout>
-    ) : (
-      <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
-    )
-  }
-/>
+          path="/friends"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true}>
+                <FriendsPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
+        />
 
         <Route
           path="/chat/:id"
@@ -83,7 +97,8 @@ const App = () => {
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
-            )}
+            )
+          }
         />
         <Route
           path="/call/:id"
@@ -92,15 +107,21 @@ const App = () => {
               <CallPage />
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
-            )}
+            )
+          }
         />
         <Route
           path="/onboarding"
           element={
             isAuthenticated ? (
-              !isOnboarded ? ( <OnboardingPage />) : (<Navigate to="/" />)
+              !isOnboarded ? (
+                <OnboardingPage />
+              ) : (
+                <Navigate to="/" />
+              )
             ) : (
-            <Navigate to="/login" /> )
+              <Navigate to="/login" />
+            )
           }
         />
       </Routes>
